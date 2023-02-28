@@ -1,34 +1,34 @@
-//package com.keyin.city;//package com.keyin.passenger;
-//
-//import com.keyin.data.Database;
-//import com.keyin.passenger.Passenger;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//public class CityManager {
-//    private Database database;
-//    // Used to be List<Airport> getAirportsByCityName(String cityName)
-//    public List<City> getCitiesByPassengerName(String passengerName) {
-//        Passenger passenger = database.getPassengerByName(passengerName);
-//        List<City> cities = database.getAllCities();
-//
-//        List<City> citiesToReturn = new ArrayList<City>();
-//
-//        for (City a : cities) {
-//            if (a.getPassenger().getName().equals(passenger.getName())) {
-//                citiesToReturn.add(a);
-//            }
-//        }
-//
-//        return citiesToReturn;
-//    }
-//
-//    public Database getDatabase() {
-//        return database;
-//    }
-//
-//    public void setDatabase(Database database) {
-//        this.database = database;
-//    }
-//}
+package com.keyin.city;
+
+import com.keyin.data.Database;
+import com.keyin.passenger.Passenger;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class CityManager {
+
+        public CityData cityData;
+
+        public List<City> getAllCities() {
+            return cityData.getAllCities();
+        }
+
+        public City findMatchingCity(City cityToFind){
+            List<City> cityList = cityData.getAllCities();
+            for (City city : cityList) {
+                if (city.equals(cityToFind)){
+                    return city;
+                }
+            }
+            return null;
+        }
+
+        public CityData getCityData() {
+            return cityData;
+        }
+
+        public void setCityData(CityData cityData) {
+            this.cityData = cityData;
+        }
+}

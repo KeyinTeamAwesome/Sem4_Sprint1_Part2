@@ -1,18 +1,27 @@
 package com.keyin.data;
 
 import com.keyin.city.City;
-import com.keyin.city.Passenger;
+import com.keyin.passenger.Passenger;
 
 import java.util.ArrayList;
 import java.util.List;
-//          old airport is new city
-//          old city is new passenger
 public class Database {
-    public Passenger getPassengerByName(String passengerName) {
+
+    public City getCityByName(String cityName) {
         return null;
     }
 
-    public List<Passenger> getAllCities() {
+    public List<City> getAllCities() {
+        return new ArrayList<City>();
+    }
+
+
+
+    public List<Passenger> getPassengerByName(String passengerName) {
+        return null;
+    }
+
+    public List<Passenger> getallPassengers() {
         return new ArrayList<Passenger>();
     }
 }

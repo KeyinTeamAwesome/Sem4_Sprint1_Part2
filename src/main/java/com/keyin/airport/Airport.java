@@ -12,14 +12,8 @@ public class Airport {
     private long id;
     private String airportName;
     private String airportCode;
-
-
-
-
     public Airport() {
     }
-
-
     public long getId() {
         return id;
     }
