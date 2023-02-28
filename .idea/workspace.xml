@@ -4,22 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b959a4-480c-4ae2-8eca-20fa6c0b1427" name="Changes" comment="init new branch">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/keyin/aircraft/Aircraft.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/keyin/aircraft/AircraftData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/keyin/aircraft/AircraftManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/keyin/airport/AirportData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/keyin/airport/AirportManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/keyin/city/CityData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/keyin/passenger/PassengerData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/keyin/passenger/PassengerManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/city/CityTest.java" afterDir="false" />
+    <list default="true" id="52b959a4-480c-4ae2-8eca-20fa6c0b1427" name="Changes" comment="scaffold out manager/data/classes">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/airport/AirportTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/passenger/PassengerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/keyin/airport/Airport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/keyin/airport/Airport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/keyin/city/City.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/keyin/city/City.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/keyin/city/CityManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/keyin/city/CityManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/keyin/data/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/keyin/data/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/keyin/city/CityManagerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/city/CityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/city/CityTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,11 +100,19 @@
       <option name="project" value="LOCAL" />
       <updated>1677599176140</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="scaffold out manager/data/classes">
+      <created>1677611763988</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1677611763988</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init new branch" />
-    <option name="LAST_COMMIT_MESSAGE" value="init new branch" />
+    <MESSAGE value="scaffold out manager/data/classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="scaffold out manager/data/classes" />
   </component>
 </project>
