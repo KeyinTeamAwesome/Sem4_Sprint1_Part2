@@ -22,23 +22,36 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 // TODO: Detect array of objects and print each object on a new line
+// TODO: Display message if response is empty (For example, if the user enters an id that doesn't exist) (error: cannot map.size() of null)
 public class HTTPClient {
     public void query(String endpoint) {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/" + endpoint)).build();
-        System.out.println("http://localhost:8080/" + endpoint);
+        System.out.println("\n------------ ENDPOINT: ------------\n");
+        System.out.println("http://localhost:8080/" + endpoint + "\n");
 
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             if (response.statusCode() == 200) {
                 String jsonString = response.body();
-                System.out.println("***** Raw Data: " + jsonString + "\n");
+                System.out.println("------------ RAW DATA: ------------\n");
+                // TODO: Display message if null/empty
+                System.out.println(jsonString + "\n");
 
                 // Check if the JSON string is the format of an array of objects
                 // If not, add square brackets to format it as if it's an array of objects (simpler to parse)
-                // TODO: With fresh eyes, check if I'm being silly and there's a better way to do this
-                if (!jsonString.startsWith("[") && !jsonString.endsWith("]")) {
+                // TODO:
+                //       With fresh eyes, check if I'm being silly and there's a better way to do this
+                //       I can either keep it in, or alter the backend getbyid code to always return an array of object(s):
+                //                  @GetMapping("/city/{id}")
+                //                  public List<City> getCityById(@PathVariable Long id) {
+                //                      Optional<City> optionalCity = repo.findById(id);
+                //                      List<City> cities = new ArrayList<>();
+                //                      optionalCity.ifPresent(cities::add);
+                //                      return cities;
+                //                  }
+                if (!(jsonString.startsWith("[") && jsonString.endsWith("]"))) {
                     jsonString = "[" + jsonString + "]";
                 }
 
@@ -56,44 +69,51 @@ public class HTTPClient {
                 for (Object obj : jsonArray) {
                     JSONObject jsonObj = (JSONObject) obj;
 
-                    // Create a TreeMap to store the object properties
-                    Map<String, Object> treeMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER); // To sort the keys in alphabetical order, use 'new TreeMap<>(String.CASE_INSENSITIVE_ORDER)'
-                    treeMap.putAll(jsonObj);
+                    if (jsonObj != null) {
+                        // Create a TreeMap to store the object properties
+                        Map<String, Object> treeMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER); // To sort the keys in alphabetical order, use 'new TreeMap<>(String.CASE_INSENSITIVE_ORDER)'
+                        treeMap.putAll(jsonObj);
 
-                    // Making sure the "id" key is at the beginning of the LinkedHashMap... (For readability)
-                    // Check if "id" key exists in the object properties
-                    if (treeMap.containsKey("id")) {
-                        // Remove the "id" key-value pair from the TreeMap
-                        Object idValue = treeMap.remove("id");
+                        // Making sure the "id" key is at the beginning of the LinkedHashMap... (For readability)
+                        // Check if "id" key exists in the object properties
+                        if (treeMap.containsKey("id")) {
+                            // Remove the "id" key-value pair from the TreeMap
+                            Object idValue = treeMap.remove("id");
 
-                        // Put the "id" key-value pair at the beginning of the LinkedHashMap
-                        jsonMap.put("id", idValue);
+                            // Put the "id" key-value pair at the beginning of the LinkedHashMap
+                            jsonMap.put("id", idValue);
+                        }
+
+                        // Add the remaining key-value pairs to the LinkedHashMap
+                        jsonMap.putAll(treeMap);
+
+                        // Create an ObjectMapper to convert the LinkedHashMap to JSON
+                        ObjectMapper objectMapper = new ObjectMapper();
+                        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+                        objectMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+
+                        // Create a DefaultPrettyPrinter to format the JSON & add settings for indentation
+                        DefaultPrettyPrinter printer = new DefaultPrettyPrinter().withObjectIndenter(new DefaultIndenter("\t", "\n"));
+                        String jsonAsString = objectMapper.writer(printer).writeValueAsString(jsonMap);
+
+                        // Add the formatted JSON string to the list
+                        formattedJSONStringlist.add(jsonAsString);
                     }
-
-                    // Add the remaining key-value pairs to the LinkedHashMap
-                    jsonMap.putAll(treeMap);
-
-                    // Create an ObjectMapper to convert the LinkedHashMap to JSON
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-                    objectMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-
-                    // Create a DefaultPrettyPrinter to format the JSON & add settings for indentation
-                    DefaultPrettyPrinter printer = new DefaultPrettyPrinter().withObjectIndenter(new DefaultIndenter("\t", "\n"));
-                    String jsonAsString = objectMapper.writer(printer).writeValueAsString(jsonMap);
-
-                    // Add the formatted JSON string to the list
-                    formattedJSONStringlist.add(jsonAsString);
-
                 }
 
                 // Print the list of formatted JSON strings
-                System.out.println("------------ JSON: ------------\n");
+                System.out.println("-------------- JSON: --------------\n");
 
                 // formattedJSONStringlist could simply be printed as it is, but this loop will increase
-                // readability by adding a new line after each JSON string, while still being valid JSON.
+                // readability by adding new line after each record, while still being valid JSON.
                 int i = 0;
+                if (formattedJSONStringlist.size() == 0) {
+                    System.out.println("There is no information to be displayed.");
+                }
                 for (String formattedJSONString : formattedJSONStringlist) {
+                    if (formattedJSONStringlist == null) {
+                        System.out.println("There is no information to be displayed.");
+                    }
                     // Check if the current object is the last object in the list
                     // If so, print the JSON string without a comma at the end
                     if (i++ == formattedJSONStringlist.size() - 1) {
