@@ -43,8 +43,8 @@ public class CommandLineInterface {
 
     public CommandLineInterface() {
         // Initialize commands map
-        commands.put(1, new Command1Questions()); // Sprint Questions
-        commands.put(2, new Command2Query()); // Query
+        commands.put(1, new QuestionsCommand()); // Sprint Questions
+        commands.put(2, new QueryCommand()); // Query
     }
 
     public void start() {
@@ -55,6 +55,9 @@ public class CommandLineInterface {
             Command command = commands.get(choice);
             if (command != null) {
                 command.execute();
+            } else if (choice == 99) {
+                System.out.println("\nGoodbye!");
+                System.exit(0); // Exit program
             } else {
                 System.out.println("Invalid choice: " + choice);
             }
@@ -62,7 +65,7 @@ public class CommandLineInterface {
     }
 
     private void displayMainMenu() {
-        System.out.println("Main Menu:");
+        System.out.println("\n------------ MAIN MENU ------------");
         System.out.println("1. Sprint Questions (Command 1)");
         System.out.println("2. Query Database (Command 2)");
         System.out.print("> ");
@@ -71,6 +74,7 @@ public class CommandLineInterface {
     private int readIntInput() {
         while (!scanner.hasNextInt()) {
             scanner.nextLine();
+
             System.out.print("Invalid input. Please enter a number: ");
         }
         int input = scanner.nextInt();
@@ -83,21 +87,25 @@ public class CommandLineInterface {
     }
 
     // ------------------------------- Command 1 (Main Menu --> 1. Questions) -------------------------------
-    private class Command1Questions implements Command {
+    private class QuestionsCommand implements Command {
         private Map<Integer, SubCommand> subCommands = new HashMap<>();
 
-        public Command1Questions() {
-            subCommands.put(1, new SubCommand1Question1());
-            subCommands.put(2, new SubCommand2Question2());
-            subCommands.put(3, new SubCommand3Question3());
-            subCommands.put(4, new SubCommand4Question4());
+        private interface SubCommand {
+            void execute();
+        }
+
+        public QuestionsCommand() {
+            subCommands.put(1, new Question1SubCommand());
+            subCommands.put(2, new Question2SubCommand());
+            subCommands.put(3, new Question3SubCommand());
+            subCommands.put(4, new Question4SubCommand());
         }
 
         // Invoker
         @Override
         public void execute() {
             while (true) {
-                displayCommand1QuestionsMenu();
+                displayQuestionsCommandMenu();
                 int choice = readIntInput();
                 SubCommand subCommand = subCommands.get(choice);
                 if (subCommand != null) {
@@ -105,6 +113,7 @@ public class CommandLineInterface {
                 } else if (choice == 0) { // Go back to previous menu
                     return; // exit sub-menu
                 } else if (choice == 99) {
+                    System.out.println("\nGoodbye!");
                     System.exit(0); // Exit program
                 } else {
                     System.out.println("Invalid choice: " + choice);
@@ -112,8 +121,8 @@ public class CommandLineInterface {
             }
         }
 
-        private void displayCommand1QuestionsMenu() {
-            System.out.println("(Command 1) Sprint Questions Menu:");
+        private void displayQuestionsCommandMenu() {
+            System.out.println("\n------------ QUESTIONS ------------");
             System.out.println("1. What airports are in what cities? (Sub-command 1)");
             System.out.println("2. List all aircraft passengers have travelled on? (Sub-command 2)");
             System.out.println("3. Which airports can aircraft take off from and land at? (Sub-command 3)");
@@ -122,85 +131,44 @@ public class CommandLineInterface {
             System.out.print("> ");
         }
 
-        private interface SubCommand {
-            void execute();
-        }
-
         // (Questions --> 1. What airports are in what cities?)
-        private class SubCommand1Question1 implements SubCommand {
+        private class Question1SubCommand implements SubCommand {
             @Override
             public void execute() {
-                System.out.println("Executing sub-command 1 of command 1");
-                // TODO: Implement HTTPClient // TEST - DELETE!
-                httpClient.query("airport/passengers_search?lastName=Doe");
+                httpClient.query("cities_airports");
             }
 
         }
 
         // (Questions --> 2. List all aircraft passengers have travelled on?)
-        private class SubCommand2Question2 implements SubCommand {
+        private class Question2SubCommand implements SubCommand {
             @Override
             public void execute() {
-                System.out.println("Executing sub-command 2 of command 1");
-                // TODO: Implement HTTPClient
+                httpClient.query("aircraft_passengers");
             }
         }
 
         // (Questions --> 3. Which airports can aircraft take off from and land at?)
-        private class SubCommand3Question3 implements SubCommand {
+        private class Question3SubCommand implements SubCommand {
             @Override
             public void execute() {
-                System.out.println("Executing sub-command 3 of command 1");
-                // TODO: Implement HTTPClient
+                httpClient.query("aircraft_airports");
             }
         }
 
         // (Questions --> 4. What airports have passengers used?)
-        private class SubCommand4Question4 implements SubCommand {
+        private class Question4SubCommand implements SubCommand {
             @Override
             public void execute() {
-                System.out.println("Executing sub-command 4 of command 1");
-                // TODO: Implement HTTPClient
+                httpClient.query("airports_passengers");
             }
         }
     }
 
     // --------------------------------- Command 2 (Main Menu --> 2. Query) ---------------------------------
-    private class Command2Query implements Command {
+    private class QueryCommand implements Command {
 
         private Map<Integer, SubCommand> subCommands = new HashMap<>();
-
-        // Constructor / Invoker
-        public Command2Query() {
-            subCommands.put(1, new SubCommand1GetAll());
-            // TODO: Sub-command 2 (Get By ID)
-            subCommands.put(2, new SubCommand2GetByID());
-        }
-
-        // Invoker
-        @Override
-        public void execute() {
-            while (true) {
-                displayCommand2QueryMenu();
-                int choice = readIntInput();
-                SubCommand subCommand = subCommands.get(choice);
-                if (subCommand != null) {
-                    subCommand.execute();
-                } else if (choice == 0) {
-                    return;
-                } else {
-                    System.out.println("Invalid choice: " + choice);
-                }
-            }
-        }
-
-        private void displayCommand2QueryMenu() {
-            System.out.println("Select the query type:");
-            System.out.println("1. Get All (Sub-command 1)");
-            System.out.println("2. Get By ID (Sub-command 2)");
-            System.out.println("0. Back");
-            System.out.print("> ");
-        }
 
         private interface SubCommand {
             void execute();
@@ -210,16 +178,48 @@ public class CommandLineInterface {
             void execute();
         }
 
+        public QueryCommand() {
+            subCommands.put(1, new GetAllSubCommand());
+            subCommands.put(2, new GetByIdSubCommand());
+        }
+
+        @Override
+        public void execute() {
+            while (true) {
+                displayQueryCommandMenu();
+                int choice = readIntInput();
+                SubCommand subCommand = subCommands.get(choice);
+                if (subCommand != null) {
+                    subCommand.execute();
+                } else if (choice == 0) {
+                    return;
+                } else if (choice == 99) {
+                    System.out.println("\nGoodbye!");
+                    System.exit(0); // Exit program
+                } else {
+                    System.out.println("Invalid choice: " + choice);
+                }
+            }
+        }
+
+        private void displayQueryCommandMenu() {
+            System.out.println("\n-------- SELECT QUERY TYPE --------");
+            System.out.println("1. Get All (Sub-command 1)");
+            System.out.println("2. Get By ID (Sub-command 2)");
+            System.out.println("0. Back");
+            System.out.print("> ");
+        }
+
         // ------------------------------ Sub-Command 1 (Query --> 1. Get All) ------------------------------
-        private class SubCommand1GetAll implements SubCommand {
+        private class GetAllSubCommand implements SubCommand {
 
             private Map<Integer, SubSubCommand> subSubCommands = new HashMap<>();
 
-            public SubCommand1GetAll() {
-                subSubCommands.put(1, new SubSubCommand1GetAllCities());
-                subSubCommands.put(2, new SubSubCommandWithIDGetAllPassengers());
-                subSubCommands.put(3, new SubSubCommand3GetAllAirports());
-                subSubCommands.put(4, new SubSubCommand4GetAllAircraft());
+            public GetAllSubCommand() {
+                subSubCommands.put(1, new GetAllCitiesSubSubCommand());
+                subSubCommands.put(2, new GetAllPassengersSubSubCommand());
+                subSubCommands.put(3, new GetAllAirportsSubSubCommand());
+                subSubCommands.put(4, new GetAllAircraftSubSubCommand());
 
             }
 
@@ -233,6 +233,9 @@ public class CommandLineInterface {
                         subSubCommand.execute();
                     } else if (choice == 0) {
                         return; // exit sub-menu
+                    } else if (choice == 99) {
+                        System.out.println("\nGoodbye!");
+                        System.exit(0); // Exit program
                     } else {
                         System.out.println("Invalid choice: " + choice);
                     }
@@ -240,7 +243,7 @@ public class CommandLineInterface {
             }
 
             private void displaySubCommand1Menu() { // Get All Menu
-                System.out.println("Select Table to Get All:");
+                System.out.println("\n------ GET ALL: SELECT TABLE ------");
                 System.out.println("1. Cities (Sub-sub-command 1)");
                 System.out.println("2. Passengers (Sub-sub-command 2)");
                 System.out.println("3. Airports (Sub-sub-command 3)");
@@ -252,58 +255,58 @@ public class CommandLineInterface {
             // ----------- Sub-Sub-Command Execution (Query --> Get All --> <#. Sub-Sub-Command>) ----------
 
             // (Query --> Get All --> 1. Cities)
-            private class SubSubCommand1GetAllCities implements Command2Query.SubSubCommand {
+            private class GetAllCitiesSubSubCommand implements QueryCommand.SubSubCommand {
                 @Override
                 public void execute() {
-                    System.out.println("CITIES: Executing sub-sub-command 1 of sub-command 1 of command 2");
+//                    System.out.println("CITIES: Executing sub-sub-command 1 of sub-command 1 of command 2");
                     httpClient.query("cities");
                 }
             }
 
             // (Query --> Get All --> 2. Passengers)
-            private class SubSubCommandWithIDGetAllPassengers implements Command2Query.SubSubCommand {
+            private class GetAllPassengersSubSubCommand implements QueryCommand.SubSubCommand {
                 @Override
                 public void execute() {
-                    System.out.println("PASSENGERS: Executing sub-sub-command 2 of sub-command 1 of command 2");
+//                    System.out.println("PASSENGERS: Executing sub-sub-command 2 of sub-command 1 of command 2");
                     httpClient.query("passengers");
                 }
             }
 
             // (Query --> Get All --> 3. Airports)
-            private class SubSubCommand3GetAllAirports implements Command2Query.SubSubCommand {
+            private class GetAllAirportsSubSubCommand implements QueryCommand.SubSubCommand {
                 @Override
                 public void execute() {
-                    System.out.println("AIRPORTS: Executing sub-sub-command 3 of sub-command 1 of command 2");
+//                    System.out.println("AIRPORTS: Executing sub-sub-command 3 of sub-command 1 of command 2");
                     httpClient.query("airports");
                 }
             }
 
             // (Query --> Get All --> 4. Aircraft)
-            private class SubSubCommand4GetAllAircraft implements Command2Query.SubSubCommand {
+            private class GetAllAircraftSubSubCommand implements QueryCommand.SubSubCommand {
                 @Override
                 public void execute() {
-                    System.out.println("AIRCRAFT: Executing sub-sub-command 4 of sub-command 1 of command 2");
+//                    System.out.println("AIRCRAFT: Executing sub-sub-command 4 of sub-command 1 of command 2");
                     httpClient.query("aircraft");
                 }
             }
         }
 
 
-        // TODO: -------------------------- Sub-Command 2 (Query --> 1. Get By ID) --------------------------
+        // ----------------------------- Sub-Command 2 (Query --> 1. Get By ID) -----------------------------
 
-        private interface SubSubCommandWithID {
+        private interface SubSubCommandWithInt {
             void execute(int id);
         }
 
-        private class SubCommand2GetByID implements SubCommand {
+        private class GetByIdSubCommand implements SubCommand {
 
-            private Map<Integer, SubSubCommandWithID> subSubCommandsWithID = new HashMap<>();
+            private Map<Integer, SubSubCommandWithInt> subSubCommandsWithID = new HashMap<>();
 
-            public SubCommand2GetByID() {
-                subSubCommandsWithID.put(1, new SubSubCommand1GetCityByID());
-                subSubCommandsWithID.put(2, new SubSubCommandWithIDGetPassengerByID());
-                subSubCommandsWithID.put(3, new SubSubCommand3GetAirportByID());
-                subSubCommandsWithID.put(4, new SubSubCommand4GetAircraftByID());
+            public GetByIdSubCommand() {
+                subSubCommandsWithID.put(1, new GetCityByIdSubSubCommand());
+                subSubCommandsWithID.put(2, new GetPassengerByIdSubSubCommand());
+                subSubCommandsWithID.put(3, new GetAirportByIdSubSubCommand());
+                subSubCommandsWithID.put(4, new GetAircraftByIdSubSubCommand());
             }
 
             @Override
@@ -316,20 +319,58 @@ public class CommandLineInterface {
                         return; // exit sub-menu
                     }
 
-                    System.out.print("Please enter an integer ID: ");
-                    int id = readIntInput();
+                    if (choice == 99) {
+                        System.out.println("\nGoodbye!");
+                        System.exit(0); // Exit program
+                    }
 
-                    SubSubCommandWithID subSubCommand = subSubCommandsWithID.get(choice);
-                    if (subSubCommand != null) {
-                        subSubCommand.execute(id);
-                    } else {
+                    SubSubCommandWithInt subSubCommand = subSubCommandsWithID.get(choice);
+
+                    if (subSubCommand == null) {
                         System.out.println("Invalid choice: " + choice);
                     }
+
+                    if (subSubCommand != null) {
+                        String chosenEntity = null;
+                        switch (choice) {
+                            case 1 -> chosenEntity = "CITY";
+                            case 2 -> chosenEntity = "PASSENGER";
+                            case 3 -> chosenEntity = "AIRPORT";
+                            case 4 -> chosenEntity = "AIRCRAFT";
+                        }
+                        System.out.printf("\n------- GET BY %s: ENTER ID -------\n", chosenEntity);
+                        System.out.print("Please enter an integer ID: ");
+                        while (true) {
+                            int id = readIntInput();
+                            if (id < 0) {
+                                System.out.print("Invalid input. Please enter a valid whole number: ");
+                            } else {
+                                subSubCommand.execute(id);
+                                break;
+                            }
+                        }
+                    }
+//                    if (subSubCommand != null) {
+//                        String chosenEntity = null;
+//                        switch (choice) {
+//                            case 1 -> chosenEntity = "CITY";
+//                            case 2 -> chosenEntity = "PASSENGER";
+//                            case 3 -> chosenEntity = "AIRPORT";
+//                            case 4 -> chosenEntity = "AIRCRAFT";
+//                        }
+//
+//                        System.out.printf("\n------- GET BY %s: ENTER ID -------", chosenEntity);
+//                        System.out.print("Please enter an integer ID: ");
+//                        subSubCommand.execute(id);
+//                    } else {
+//                        System.out.println("Invalid choice: " + choice);
+//                    }
                 }
             }
 
+
             private void displaySubCommand2Menu() {
-                System.out.println("Select Table to Get By ID:");
+                System.out.println("\n----- GET BY ID: SELECT TABLE -----");
                 System.out.println("1. City (Sub-sub-command 1)");
                 System.out.println("2. Passenger (Sub-sub-command 2)");
                 System.out.println("3. Airport (Sub-sub-command 3)");
@@ -342,37 +383,38 @@ public class CommandLineInterface {
             // ----------- Sub-Sub-Command Execution (Query --> Get By ID --> <#. Sub-Sub-Command>) ----------
 
             // (Query --> Get By ID --> 1. City)
-            private class SubSubCommand1GetCityByID implements Command2Query.SubSubCommandWithID {
+            private class GetCityByIdSubSubCommand implements QueryCommand.SubSubCommandWithInt {
                 @Override
                 public void execute(int id) {
-                    System.out.println("City: Executing sub-sub-command 1 of sub-command 2 of command 2");
+//                    System.out.println("City: Executing sub-sub-command 1 of sub-command 2 of command 2");
                     httpClient.query("city/" + id);
                 }
             }
 
             // (Query --> Get By ID --> 2. Passenger)
-            private class SubSubCommandWithIDGetPassengerByID implements Command2Query.SubSubCommandWithID {
+            private class GetPassengerByIdSubSubCommand implements QueryCommand.SubSubCommandWithInt {
                 @Override
                 public void execute(int id) {
-                    System.out.println("Passenger: Executing sub-sub-command 2 of sub-command 2 of command 2");
+//                    System.out.println("Passenger: Executing sub-sub-command 2 of sub-command 2 of command 2");
+                    // TODO: Make sure passenger endpoint is added to the backend
                     httpClient.query("passenger/" + id);
                 }
             }
 
             // (Query --> Get By ID --> 3. Airport)
-            private class SubSubCommand3GetAirportByID implements Command2Query.SubSubCommandWithID {
+            private class GetAirportByIdSubSubCommand implements QueryCommand.SubSubCommandWithInt {
                 @Override
                 public void execute(int id) {
-                    System.out.println("Airport: Executing sub-sub-command 3 of sub-command 2 of command 2");
+//                    System.out.println("Airport: Executing sub-sub-command 3 of sub-command 2 of command 2");
                     httpClient.query("airport/" + id);
                 }
             }
 
             // (Query --> Get By ID --> 4. Aircraft)
-            private class SubSubCommand4GetAircraftByID implements Command2Query.SubSubCommandWithID {
+            private class GetAircraftByIdSubSubCommand implements QueryCommand.SubSubCommandWithInt {
                 @Override
                 public void execute(int id) {
-                    System.out.println("Aircraft: Executing sub-sub-command 4 of sub-command 2 of command 2");
+//                    System.out.println("Aircraft: Executing sub-sub-command 4 of sub-command 2 of command 2");
                     httpClient.query("aircraft/" + id);
                 }
             }
