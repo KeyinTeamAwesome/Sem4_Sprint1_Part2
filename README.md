@@ -4,9 +4,9 @@
 
 This is a group project for our 4nd Semester at Keyin College's Software Development Program.
 
-This repository contains **Part 2** of the assignment. *(HTTP Client/CLI/Testing)*
+⠀⠀⠀⠀❗ ⠀➝⠀This repository contains **Part 2** of the assignment. *(HTTP Client/CLI/Testing)*
 
-**Part 1** can be found [**HERE**](https://github.com/KeyinTeamAwesome/Sem4_Sprint1_Part1). *(Spring Boot Server)*
+⠀⠀⠀⠀☞ ➝⠀**Part 1** can be found [**HERE**](https://github.com/KeyinTeamAwesome/Sem4_Sprint1_Part1). *(Spring Boot Server)*
 
 ---
 
