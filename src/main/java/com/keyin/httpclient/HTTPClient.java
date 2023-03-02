@@ -84,7 +84,7 @@ public class HTTPClient {
         return jsonArray;
     }
 
-    public JSONArray formatJson(List<String> jsonArray) throws JsonProcessingException {
+    public static JSONArray formatJson(List<String> jsonArray) throws JsonProcessingException {
 
         // Create an array to store the JSON strings after they're formatted
         JSONArray formattedJSONArray = new JSONArray();
