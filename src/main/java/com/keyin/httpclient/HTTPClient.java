@@ -24,9 +24,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-// TODO: Detect array of objects and print each object on a new line
-// TODO: Display message if response is empty (For example, if the user enters an id that doesn't exist) (error: cannot map.size() of null)
-// TODO: Find out why question uriPath responses are causing an error at: Map<String, Object> treeMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+
+// TODO: Display message if raw response is empty (For example, if the user enters an id that doesn't exist)
+
 public class HTTPClient {
     private final HttpClient client;
 
@@ -58,20 +58,6 @@ public class HTTPClient {
     public static JSONArray parseJson(String jsonString) throws ParseException {
         // Check if the JSON string is the format of an array of objects
         // If not, add square brackets to format it as if it's an array of objects (simpler to parse)
-        /*
-         TODO:
-           With fresh eyes, check if I'm being silly and there's a better way to do this
-           I can either keep it in, or alter the backend getbyid code to always return an array of object(s):
-           ----------------------------------- Replacement Code (Tested) ------------------------------------
-                      @GetMapping("/city/{id}")
-                      public List<City> getCityById(@PathVariable Long id) {
-                          Optional<City> optionalCity = repo.findById(id);
-                          List<City> cities = new ArrayList<>();
-                          optionalCity.ifPresent(cities::add);
-                          return cities;
-                      }
-        */
-
         if (!(jsonString.startsWith("[") && jsonString.endsWith("]"))) {
             jsonString = "[" + jsonString + "]";
         }
@@ -91,22 +77,6 @@ public class HTTPClient {
 
         // Create a LinkedHashMap to store key/value pairs
         Map<String, Object> jsonMap = new LinkedHashMap<>();
-
-        // TODO: Find out how to fix casting error for question responses
-        //  -------------------------------------------------------------------------------------------------
-        //          FIXED(?): I think I fixed it by changing the backend code to return an array of
-        //          objects in the correct format.
-        //          -----------------------------------------------------------------------------------------
-        //          @GetMapping("/cities_airports")
-        //          private List<City> getAllCitiesByAirports() throws JsonProcessingException {
-        //              List <City> a = (List<City>) repo.findAll();
-        //              List n = new ArrayList();
-        //              a.forEach(i -> {
-        //                  JSONObject o = new JSONObject();
-        //                  o.put("id", i.getId());
-        //                  o.put("cityName", i.getCityName());
-        //                  o.put("cityState", i.getCityState());
-        //                  o.put("airports", i.getAirports());
 
         // Iterate through the JSON array
         for (Object obj : jsonArray) {
@@ -151,7 +121,7 @@ public class HTTPClient {
         // Print the list of formatted JSON strings
         System.out.println("-------------- JSON: --------------\n");
 
-        // formattedJSONStringlist could simply be printed as it is, but this loop will increase
+        // formattedJSONArray could simply be printed as it is, but this loop will increase
         // readability by adding new line after each record, while still being valid JSON.
         int i = 0;
         if (formattedJSONArray.size() == 0) {
@@ -181,11 +151,11 @@ public class HTTPClient {
         System.out.println("------------ RAW DATA: ------------\n");
         System.out.println(response + "\n");
 
-//        JSONArray jsonArray = parseJson(response);
-//
-//
-//        JSONArray formattedJSONArray = formatJson(jsonArray);
-//
-//        displayJSON(formattedJSONArray);
+        JSONArray jsonArray = parseJson(response);
+
+
+        JSONArray formattedJSONArray = formatJson(jsonArray);
+
+        displayJSON(formattedJSONArray);
     }
 }
