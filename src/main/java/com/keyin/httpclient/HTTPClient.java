@@ -62,7 +62,7 @@ public class HTTPClient {
          TODO:
            With fresh eyes, check if I'm being silly and there's a better way to do this
            I can either keep it in, or alter the backend getbyid code to always return an array of object(s):
-           ----------------------------------- Replacement Code (Tested) -----------------------------------
+           ----------------------------------- Replacement Code (Tested) ------------------------------------
                       @GetMapping("/city/{id}")
                       public List<City> getCityById(@PathVariable Long id) {
                           Optional<City> optionalCity = repo.findById(id);
@@ -78,40 +78,38 @@ public class HTTPClient {
 
         // Try to parse JSON string to JSON array
         JSONParser parser = new JSONParser();
+
         JSONArray jsonArray = (JSONArray) parser.parse(jsonString);
 
         return jsonArray;
     }
 
-    public static JSONArray formatJson(List<String> jsonArray) throws JsonProcessingException {
+    public JSONArray formatJson(List<String> jsonArray) throws JsonProcessingException {
 
         // Create an array to store the JSON strings after they're formatted
         JSONArray formattedJSONArray = new JSONArray();
 
         // Create a LinkedHashMap to store key/value pairs
         Map<String, Object> jsonMap = new LinkedHashMap<>();
-//        System.out.println("jsonArray: " + jsonArray);
-//        System.out.println("jsonArray getclass: " + jsonArray.getClass());
-//        System.out.println("jsonArray instanceof JSONObject: " + (jsonArray instanceof JSONObject));
 
-        // TODO: Find a better solution for this temporary fix
-        //       Maybe change something in the backend to make sure it's always wrapped in an object?
-        // Check if the JSON array is an instance of a JSONObject, if not, wrap in object and array
-        if (!(jsonArray instanceof JSONObject)) {
-            JSONObject object = new JSONObject();
-            object.put("", jsonArray);
-            JSONArray array = new JSONArray();
-            array.add(object);
-            jsonArray = array;
-        }
+        // TODO: Find out how to fix casting error for question responses
+        //  -------------------------------------------------------------------------------------------------
+        //          FIXED(?): I think I fixed it by changing the backend code to return an array of
+        //          objects in the correct format.
+        //          -----------------------------------------------------------------------------------------
+        //          @GetMapping("/cities_airports")
+        //          private List<City> getAllCitiesByAirports() throws JsonProcessingException {
+        //              List <City> a = (List<City>) repo.findAll();
+        //              List n = new ArrayList();
+        //              a.forEach(i -> {
+        //                  JSONObject o = new JSONObject();
+        //                  o.put("id", i.getId());
+        //                  o.put("cityName", i.getCityName());
+        //                  o.put("cityState", i.getCityState());
+        //                  o.put("airports", i.getAirports());
 
-        // Loop through each object in JSON array
+        // Iterate through the JSON array
         for (Object obj : jsonArray) {
-//            System.out.println("obj: " + obj);
-//            System.out.println("obj getclass: " + obj.getClass());
-//            System.out.println("obj instanceof JSONObject: " + (obj instanceof JSONObject));
-//            System.out.println("obj instanceof JSONArray: " + (obj instanceof JSONArray));
-
             JSONObject jsonObj = (JSONObject) obj;
 
             if (jsonObj != null) {
