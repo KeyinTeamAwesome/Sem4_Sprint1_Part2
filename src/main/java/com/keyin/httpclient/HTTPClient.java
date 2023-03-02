@@ -181,11 +181,11 @@ public class HTTPClient {
         System.out.println("------------ RAW DATA: ------------\n");
         System.out.println(response + "\n");
 
-        JSONArray jsonArray = parseJson(response);
-
-
-        JSONArray formattedJSONArray = formatJson(jsonArray);
-
-        displayJSON(formattedJSONArray);
+//        JSONArray jsonArray = parseJson(response);
+//
+//
+//        JSONArray formattedJSONArray = formatJson(jsonArray);
+//
+//        displayJSON(formattedJSONArray);
     }
 }
