@@ -29,6 +29,7 @@ import org.json.simple.parser.ParseException;
 // TODO: Find out why question uriPath responses are causing an error at: Map<String, Object> treeMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 public class HTTPClient {
     private final HttpClient client;
+
     public HTTPClient() {
         this.client = HttpClient.newHttpClient();
     }
@@ -47,11 +48,13 @@ public class HTTPClient {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         if (response.statusCode() != 200) {
-            System.out.printf("Error: Request failed with status code %d.\n", response.statusCode());
+            System.out.printf("❗ (%d) Error: Request failed.", response.statusCode());
+            System.out.println("\n");
         }
 
         return response;
     }
+
     public static JSONArray parseJson(String jsonString) throws ParseException {
         // Check if the JSON string is the format of an array of objects
         // If not, add square brackets to format it as if it's an array of objects (simpler to parse)
@@ -75,25 +78,45 @@ public class HTTPClient {
 
         // Try to parse JSON string to JSON array
         JSONParser parser = new JSONParser();
-        JSONArray parsedJSONArray = (JSONArray) parser.parse(jsonString);
+        JSONArray jsonArray = (JSONArray) parser.parse(jsonString);
 
-        return parsedJSONArray;
+        return jsonArray;
     }
-    public static JSONArray formatJson(List<String> parsedJSONArray) throws JsonProcessingException {
+
+    public static JSONArray formatJson(List<String> jsonArray) throws JsonProcessingException {
 
         // Create an array to store the JSON strings after they're formatted
         JSONArray formattedJSONArray = new JSONArray();
 
         // Create a LinkedHashMap to store key/value pairs
         Map<String, Object> jsonMap = new LinkedHashMap<>();
+//        System.out.println("jsonArray: " + jsonArray);
+//        System.out.println("jsonArray getclass: " + jsonArray.getClass());
+//        System.out.println("jsonArray instanceof JSONObject: " + (jsonArray instanceof JSONObject));
+
+        // TODO: Find a better solution for this temporary fix
+        //       Maybe change something in the backend to make sure it's always wrapped in an object?
+        // Check if the JSON array is an instance of a JSONObject, if not, wrap in object and array
+        if (!(jsonArray instanceof JSONObject)) {
+            JSONObject object = new JSONObject();
+            object.put("", jsonArray);
+            JSONArray array = new JSONArray();
+            array.add(object);
+            jsonArray = array;
+        }
 
         // Loop through each object in JSON array
-        for (Object obj : parsedJSONArray) {
+        for (Object obj : jsonArray) {
+//            System.out.println("obj: " + obj);
+//            System.out.println("obj getclass: " + obj.getClass());
+//            System.out.println("obj instanceof JSONObject: " + (obj instanceof JSONObject));
+//            System.out.println("obj instanceof JSONArray: " + (obj instanceof JSONArray));
+
             JSONObject jsonObj = (JSONObject) obj;
 
             if (jsonObj != null) {
                 // Create a TreeMap to store the object properties
-                Map<String, Object> treeMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER); // To sort the keys in alphabetical order, use 'new TreeMap<>(String.CASE_INSENSITIVE_ORDER)'
+                Map<String, Object> treeMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
                 treeMap.putAll(jsonObj);
 
                 // Making sure the "id" key is at the beginning of the LinkedHashMap... (For readability)
@@ -153,10 +176,18 @@ public class HTTPClient {
 
     public void runTask(String uriOrigin, String uriPath) throws IOException, InterruptedException, URISyntaxException, ParseException {
         HttpRequest request = createRequest(uriOrigin, uriPath);
+        System.out.println("\n------------ ENDPOINT: ------------\n");
+        System.out.println(uriOrigin + uriPath + "\n");
+
         String response = sendHttpRequest(client, request).body();
-        JSONArray parsedJSONArray = parseJson(response);
-        JSONArray formattedJSONArray = formatJson(parsedJSONArray);
+        System.out.println("------------ RAW DATA: ------------\n");
+        System.out.println(response + "\n");
+
+        JSONArray jsonArray = parseJson(response);
+
+
+        JSONArray formattedJSONArray = formatJson(jsonArray);
+
         displayJSON(formattedJSONArray);
     }
 }
-

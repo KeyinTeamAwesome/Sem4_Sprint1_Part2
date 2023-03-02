@@ -246,7 +246,7 @@ public class CommandLineInterface {
             @Override
             public void execute() {
                 while (true) {
-                    displaySubCommand1Menu();
+                    displayGetAllSubCommandMenu();
                     int choice = readIntInput();
                     SubSubCommand subSubCommand = subSubCommands.get(choice);
                     if (subSubCommand != null) {
@@ -263,7 +263,7 @@ public class CommandLineInterface {
                 }
             }
 
-            private void displaySubCommand1Menu() { // Get All Menu
+            private void displayGetAllSubCommandMenu() { // Get All Menu
                 System.out.println("\n------ GET ALL: SELECT TABLE ------");
                 System.out.println("1. Cities");
                 System.out.println("2. Passengers");
@@ -349,7 +349,7 @@ public class CommandLineInterface {
             @Override
             public void execute() {
                 while (true) {
-                    displaySubCommand2Menu();
+                    displayGetByIdSubCommandMenu();
                     int choice = readIntInput();
 
                     if (choice == 0) {
@@ -391,12 +391,12 @@ public class CommandLineInterface {
             }
 
 
-            private void displaySubCommand2Menu() {
+            private void displayGetByIdSubCommandMenu() {
                 System.out.println("\n----- GET BY ID: SELECT TABLE -----");
-                System.out.println("1. City (Sub-sub-command 1)");
-                System.out.println("2. Passenger (Sub-sub-command 2)");
-                System.out.println("3. Airport (Sub-sub-command 3)");
-                System.out.println("4. Aircraft (Sub-sub-command 4)");
+                System.out.println("1. City");
+                System.out.println("2. Passenger");
+                System.out.println("3. Airport");
+                System.out.println("4. Aircraft");
                 System.out.println("0. Back");
                 System.out.print("> ");
             }
