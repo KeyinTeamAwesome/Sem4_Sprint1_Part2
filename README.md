@@ -1,10 +1,55 @@
-# Sem4_Sprint1_Part2
+# Semester 4 | Java
 
-- Makenzie Roberts
-- Kara Balsom
-- David Turner
+## **Sprint 1: Server (Spring Boot), HTTP Client, Command Line Interface, Testing**
 
-- Keyin College Sprint Week - Feb 17, 2023 to March 3, 2023
-- In this sprint you will be tasked with creating two separate Java programs and have two repos to represent the two parts.
-- Part 1 = A server program that connects to a database and implements an API that is accessible via HTTP
-- Part 2 = A client (can be a simple text-based console application) which connects via http to the server, making use of the API
+This is a group project for our 4nd Semester at Keyin College's Software Development Program.
+
+This repository contains **Part 2** of the assignment. *(HTTP Client/CLI/Testing)*
+
+**Part 1** can be found [**HERE**](https://github.com/KeyinTeamAwesome/Sem4_Sprint1_Part1). *(Spring Boot Server)*
+
+---
+
+### **Part 2: HTTP Client, Command Line Interface, Testing**
+This repository contains a **Java (Maven)** project consisting of a command line interface and HTTP client which connects via http to the server, making use of the API in [**Part 1**](https://github.com/KeyinTeamAwesome/Sem4_Sprint1_Part1).
+
+---
+
+### Contributers
+
+<table>
+  <tr>
+    <th>Author</th>
+    <th>GitHub</th>
+  </tr>
+  <tr>
+    <td>Makenzie Roberts</td>
+    <td>
+      <a href="https://github.com/MakenzieRoberts"><img height="50px" src="https://avatars.githubusercontent.com/u/100213075?v=4"></a>
+    </td>
+  </tr> 
+  <tr>
+    <td>Kara Balsom</td>
+    <td>
+      <a href="https://github.com/kbalsom"><img height="50px" src="https://avatars.githubusercontent.com/u/100210446?v=4"></a>
+    </td>
+  </tr>
+  <tr>
+    <td>David Turner</td>
+    <td>
+      <a href="https://github.com/DeToxFox"><img height="50px" src="https://avatars.githubusercontent.com/u/95373983?v=4"></a>
+    </td>
+  </tr>
+      <td>Glen May</td>
+    <td>
+      <a href="https://github.com/ellis0n"><img height="50px" src="https://avatars.githubusercontent.com/u/100211236?v=4"></a>
+    </td>
+  </tr>
+    </tr>
+      <td>Terrance Power</td>
+    <td>
+      <a href="https://github.com/Tpower16"><img height="50px" src="https://avatars.githubusercontent.com/u/100700181?v=4"></a>
+    </td>
+  </tr>
+
+</table>
