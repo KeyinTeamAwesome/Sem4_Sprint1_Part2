@@ -35,7 +35,7 @@ public class CommandLineInterface {
     // Starts the command line interface.
     public void start() {
         System.out.println("---------------------------------------");
-        System.out.println("\nWelcome to the HTTP Client Application!\n        (To exit, enter 99.)");
+        System.out.println("\nWelcome to the HTTP Client Application!\n         (To exit, enter 99)");
         while (true) {
             displayMainMenu();
             int choice = readIntInput();
