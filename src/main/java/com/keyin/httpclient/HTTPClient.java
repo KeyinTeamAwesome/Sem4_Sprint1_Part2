@@ -127,9 +127,6 @@ public class HTTPClient {
             System.out.println("There is no data associated with this endpoint.");
         }
         for (Object formattedJSONString : formattedJSONArray) {
-//            if (formattedJSONArray == null) {
-//                System.out.println("There is no data associated with this endpoint.");
-//            }
             // Check if the current object is the last object in the list
             // If so, print the JSON string without a comma at the end
             if (i++ == formattedJSONArray.size() - 1) {
