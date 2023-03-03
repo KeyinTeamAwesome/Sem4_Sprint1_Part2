@@ -1,6 +1,4 @@
-package com.keyin;
-
-import com.keyin.httpclient.HTTPClient;
+package com.keyin.httpclient;
 
 import static org.mockito.Mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;

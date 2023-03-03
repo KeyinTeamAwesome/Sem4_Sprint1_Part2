@@ -75,6 +75,9 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.keyin.httpclient" />
+    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="com.keyin.httpclient" />
     </key>
@@ -115,12 +118,12 @@
       <module name="HTTPClient" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.keyin.*" />
+          <option name="PATTERN" value="com.keyin.httpclient.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.keyin" />
-      <option name="MAIN_CLASS_NAME" value="com.keyin.HTTPClientTest" />
+      <option name="PACKAGE_NAME" value="com.keyin.httpclient" />
+      <option name="MAIN_CLASS_NAME" value="com.keyin.httpclient.HTTPClientTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -130,12 +133,12 @@
       <module name="HTTPClient" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.keyin.*" />
+          <option name="PATTERN" value="com.keyin.httpclient.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.keyin" />
-      <option name="MAIN_CLASS_NAME" value="com.keyin.HTTPClientTest" />
+      <option name="PACKAGE_NAME" value="com.keyin.httpclient" />
+      <option name="MAIN_CLASS_NAME" value="com.keyin.httpclient.HTTPClientTest" />
       <option name="METHOD_NAME" value="HTTPClientTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -146,12 +149,12 @@
       <module name="HTTPClient" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.keyin.*" />
+          <option name="PATTERN" value="com.keyin.httpclient.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.keyin" />
-      <option name="MAIN_CLASS_NAME" value="com.keyin.HTTPClientTest" />
+      <option name="PACKAGE_NAME" value="com.keyin.httpclient" />
+      <option name="MAIN_CLASS_NAME" value="com.keyin.httpclient.HTTPClientTest" />
       <option name="METHOD_NAME" value="HttpResponseTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
