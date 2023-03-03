@@ -143,7 +143,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/cities_airports/");
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
             }
 
@@ -156,7 +156,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/aircraft_passengers/");
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
             }
         }
@@ -168,7 +168,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/aircraft_airports/");
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
             }
         }
@@ -180,7 +180,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/airports_passengers/");
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
             }
         }
@@ -285,7 +285,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/cities/");
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
                 }
             }
@@ -298,7 +298,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/passengers/");
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
                 }
             }
@@ -311,7 +311,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/airports/");
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
                 }
             }
@@ -324,7 +324,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/aircraft/");
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
                 }
             }
@@ -414,7 +414,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/city/" + id);
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
                 }
             }
@@ -428,7 +428,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/passenger/" + id);
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
                 }
             }
@@ -441,7 +441,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/airport/" + id);
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
                 }
             }
@@ -454,7 +454,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/aircraft/" + id);
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
                 }
             }

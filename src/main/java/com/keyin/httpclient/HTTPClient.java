@@ -41,14 +41,21 @@ public class HTTPClient {
     }
 
     public HttpResponse<String> sendHttpRequest(HttpRequest request) throws IOException, InterruptedException {
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        try{
+            // Send the request and get the response
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        if (response.statusCode() != 200) {
-            System.out.printf("❗ (%d) Request failed.", response.statusCode());
-            System.out.println("\n");
+            // Check if the response is successful
+            if (response.statusCode() != 200) {
+                System.out.printf("❗ (%d) Request failed.", response.statusCode());
+                System.out.println("\n");
+            }
+
+            return response;
+        } catch (IOException | InterruptedException error) {
+            System.out.println("⚠️ Connection Error.");
+            throw error;
         }
-
-        return response;
     }
 
     public static JSONArray parseJson(String jsonString) throws ParseException {
@@ -145,7 +152,7 @@ public class HTTPClient {
         if (responseBody.equals("null")) {
             System.out.println("❗ There is no data associated with this endpoint.");
         }
-//        if (!responseBody.equals("null")){
+        if (!responseBody.equals("null")){
             System.out.println("-------------- RAW DATA: --------------\n");
             System.out.println(responseBody + "\n");
 
@@ -153,7 +160,7 @@ public class HTTPClient {
             JSONArray jsonArray = parseJson(responseBody);
             JSONArray formattedJSONArray = formatJson(jsonArray);
             displayJSON(formattedJSONArray);
-//        }
+        }
     }
 }
 
