@@ -1,42 +1,38 @@
 package com.keyin.httpclient;
 
-import com.fasterxml.jackson.core.JsonParseException;
+import java.util.*;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.util.DefaultIndenter;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-// pretty json
-import java.util.*;
-
-import com.fasterxml.jackson.databind.SerializationFeature;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-
-// TODO: Display message if raw response is empty (For example, if the user enters an id that doesn't exist)
-
 public class HTTPClient {
+
     private final HttpClient client;
 
     public HTTPClient() {
         this.client = HttpClient.newHttpClient();
     }
 
-    public static HttpRequest createRequest(String uriOrigin, String uriPath) throws URISyntaxException {
-        // Create a URI from the uriOrigin and uriPath strings
-        URI uri = new URI(uriOrigin + uriPath);
+    public static HttpRequest createRequest(String uriString) throws URISyntaxException {
+        // Create the URI
+        URI uri = new URI(uriString);
 
         // Build the request using the URI, request method, and headers
         HttpRequest.Builder builder = HttpRequest.newBuilder().uri(uri);
@@ -44,11 +40,11 @@ public class HTTPClient {
         return builder.build();
     }
 
-    public static HttpResponse<String> sendHttpRequest(HttpClient client, HttpRequest request) throws IOException, InterruptedException {
+    public HttpResponse<String> sendHttpRequest(HttpRequest request) throws IOException, InterruptedException {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         if (response.statusCode() != 200) {
-            System.out.printf("❗ (%d) Error: Request failed.", response.statusCode());
+            System.out.printf("❗ (%d) Request failed.", response.statusCode());
             System.out.println("\n");
         }
 
@@ -71,7 +67,6 @@ public class HTTPClient {
     }
 
     public static JSONArray formatJson(List<String> jsonArray) throws JsonProcessingException {
-
         // Create an array to store the JSON strings after they're formatted
         JSONArray formattedJSONArray = new JSONArray();
 
@@ -118,19 +113,16 @@ public class HTTPClient {
     }
 
     public static void displayJSON(JSONArray formattedJSONArray) {
-        // Print the list of formatted JSON strings
-        System.out.println("-------------- JSON: --------------\n");
-
         // formattedJSONArray could simply be printed as it is, but this loop will increase
         // readability by adding new line after each record, while still being valid JSON.
         int i = 0;
-        if (formattedJSONArray.size() == 0) {
-            System.out.println("There is no information to be displayed.");
+        if (formattedJSONArray.contains("null")) {
+            System.out.println("There is no data associated with this endpoint.");
         }
         for (Object formattedJSONString : formattedJSONArray) {
-            if (formattedJSONArray == null) {
-                System.out.println("There is no information to be displayed.");
-            }
+//            if (formattedJSONArray == null) {
+//                System.out.println("There is no data associated with this endpoint.");
+//            }
             // Check if the current object is the last object in the list
             // If so, print the JSON string without a comma at the end
             if (i++ == formattedJSONArray.size() - 1) {
@@ -142,20 +134,26 @@ public class HTTPClient {
         }
     }
 
-    public void runTask(String uriOrigin, String uriPath) throws IOException, InterruptedException, URISyntaxException, ParseException {
-        HttpRequest request = createRequest(uriOrigin, uriPath);
-        System.out.println("\n------------ ENDPOINT: ------------\n");
-        System.out.println(uriOrigin + uriPath + "\n");
+    public void runTask(String uriString) throws IOException, InterruptedException, URISyntaxException, ParseException {
+        HttpRequest request = createRequest(uriString);
 
-        String response = sendHttpRequest(client, request).body();
-        System.out.println("------------ RAW DATA: ------------\n");
-        System.out.println(response + "\n");
+        System.out.println("\n-------------- ENDPOINT: --------------\n");
+        System.out.println(uriString + "\n");
 
-        JSONArray jsonArray = parseJson(response);
+        String responseBody = sendHttpRequest(request).body();
 
+        if (responseBody.equals("null")) {
+            System.out.println("❗ There is no data associated with this endpoint.");
+        }
+//        if (!responseBody.equals("null")){
+            System.out.println("-------------- RAW DATA: --------------\n");
+            System.out.println(responseBody + "\n");
 
-        JSONArray formattedJSONArray = formatJson(jsonArray);
-
-        displayJSON(formattedJSONArray);
+            System.out.println("---------------- JSON: ----------------\n");
+            JSONArray jsonArray = parseJson(responseBody);
+            JSONArray formattedJSONArray = formatJson(jsonArray);
+            displayJSON(formattedJSONArray);
+//        }
     }
 }
+

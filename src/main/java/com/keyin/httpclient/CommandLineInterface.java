@@ -4,43 +4,36 @@ import java.net.URISyntaxException;
 import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Map;
-
-// HTTP Client Imports
-
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.util.Scanner;
-
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 /*
      This command line interface uses a simple implementation of the Command Pattern.
-     ---- The Command Pattern is a behavioral design pattern in which an object is used to
+
+     --> The Command Pattern is a behavioral design pattern in which an object is used to
           represent and encapsulate all the information needed to call a method at a later time.
-     ---- This pattern is used to decouple the object that invokes the operation from the one
+
+     --> This pattern is used to decouple the object that invokes the operation from the one
           that knows how to perform it.
 */
 
-// TODO: (?) Add exit option to all sub-menus
-// TODO: DON'T FORGET TO CLOSE SCANNER (scanner.close())
-// TODO: Javadoc
+/**
+ *      This command line interface uses a simple implementation of the Command Pattern.
 
+ *      --> The Command Pattern is a behavioral design pattern in which an object is used to
+ *           represent and encapsulate all the information needed to call a method at a later time.
+
+ *      --> This pattern is used to decouple the object that invokes the operation from the one
+ *           that knows how to perform it.
+ */
 public class CommandLineInterface {
     HTTPClient httpClient = new HTTPClient();
-
-
 
     private Scanner scanner = new Scanner(System.in);
 
     // --------------------------------------------- (Main Menu) --------------------------------------------
-    private Map<Integer, Command> commands = new HashMap<>();
 
+    private Map<Integer, Command> commands = new HashMap<>();
 
     public CommandLineInterface() {
         // Initialize commands map
@@ -48,8 +41,11 @@ public class CommandLineInterface {
         commands.put(2, new QueryCommand()); // Query
     }
 
+
+    // Starts the command line interface.
     public void start() {
-        System.out.println("Welcome to the HTTP Client Application!\nTo exit, enter 99.\n");
+        System.out.println("---------------------------------------");
+        System.out.println("\nWelcome to the HTTP Client Application!\n        (To exit, enter 99.)");
         while (true) {
             displayMainMenu();
             int choice = readIntInput();
@@ -61,34 +57,41 @@ public class CommandLineInterface {
                 System.out.println("\nGoodbye!");
                 System.exit(0); // Exit program
             } else {
-                System.out.println("Invalid choice: " + choice);
+                System.out.println("\nInvalid choice.");
             }
         }
     }
 
+
+    // Displays the main menu.
     private void displayMainMenu() {
-        System.out.println("\n------------ MAIN MENU ------------");
-        System.out.println("1. Sprint Questions");
+        System.out.println("\n-------------- MAIN MENU --------------");
+        System.out.println("1. Questions");
         System.out.println("2. Query Database");
         System.out.print("> ");
     }
 
+
+    // Reads and validates user input.
     private int readIntInput() {
         while (!scanner.hasNextInt()) {
             scanner.nextLine();
 
-            System.out.print("Invalid input. Please enter a number: ");
+            System.out.print("\nInvalid input. Please enter a number.\n");
+            System.out.print("> ");
         }
         int input = scanner.nextInt();
         scanner.nextLine(); // consume remaining newline character
         return input;
     }
 
+    // Declares a method for executing a command.
     private interface Command {
         void execute();
     }
 
     // ------------------------------- Command 1 (Main Menu --> 1. Questions) -------------------------------
+
     private class QuestionsCommand implements Command {
         private Map<Integer, SubCommand> subCommands = new HashMap<>();
 
@@ -103,7 +106,6 @@ public class CommandLineInterface {
             subCommands.put(4, new Question4SubCommand());
         }
 
-        // Invoker
         @Override
         public void execute() {
             while (true) {
@@ -119,13 +121,13 @@ public class CommandLineInterface {
                     System.out.println("\nGoodbye!");
                     System.exit(0); // Exit program
                 } else {
-                    System.out.println("Invalid choice: " + choice);
+                    System.out.println("\nInvalid choice.");
                 }
             }
         }
 
         private void displayQuestionsCommandMenu() {
-            System.out.println("\n------------ QUESTIONS ------------");
+            System.out.println("\n-------------- QUESTIONS --------------");
             System.out.println("1. What airports are in what cities?");
             System.out.println("2. List all aircraft passengers have travelled on?");
             System.out.println("3. Which airports can aircraft take off from and land at?");
@@ -139,7 +141,7 @@ public class CommandLineInterface {
             @Override
             public void execute() {
                     try{
-                        httpClient.runTask("http://localhost:8080", "/cities_airports/");
+                        httpClient.runTask("http://localhost:8080/cities_airports/");
                     }catch(Exception e){
                         System.out.println("Error: " + e + "\n");
                     }
@@ -152,7 +154,7 @@ public class CommandLineInterface {
             @Override
             public void execute() {
                     try{
-                        httpClient.runTask("http://localhost:8080", "/aircraft_passengers/");
+                        httpClient.runTask("http://localhost:8080/aircraft_passengers/");
                     }catch(Exception e){
                         System.out.println("Error: " + e + "\n");
                     }
@@ -164,7 +166,7 @@ public class CommandLineInterface {
             @Override
             public void execute() {
                     try{
-                        httpClient.runTask("http://localhost:8080", "/aircraft_airports/");
+                        httpClient.runTask("http://localhost:8080/aircraft_airports/");
                     }catch(Exception e){
                         System.out.println("Error: " + e + "\n");
                     }
@@ -176,7 +178,7 @@ public class CommandLineInterface {
             @Override
             public void execute() {
                     try{
-                        httpClient.runTask("http://localhost:8080", "/airports_passengers/");
+                        httpClient.runTask("http://localhost:8080/airports_passengers/");
                     }catch(Exception e){
                         System.out.println("Error: " + e + "\n");
                     }
@@ -217,13 +219,13 @@ public class CommandLineInterface {
                     System.out.println("\nGoodbye!");
                     System.exit(0); // Exit program
                 } else {
-                    System.out.println("Invalid choice: " + choice);
+                    System.out.println("\nInvalid choice.");
                 }
             }
         }
 
         private void displayQueryCommandMenu() {
-            System.out.println("\n-------- SELECT QUERY TYPE --------");
+            System.out.println("\n---------- SELECT QUERY TYPE ----------");
             System.out.println("1. Get All");
             System.out.println("2. Get By ID");
             System.out.println("0. Back");
@@ -258,13 +260,13 @@ public class CommandLineInterface {
                         System.out.println("\nGoodbye!");
                         System.exit(0); // Exit program
                     } else {
-                        System.out.println("Invalid choice: " + choice);
+                        System.out.println("\nInvalid choice.");
                     }
                 }
             }
 
             private void displayGetAllSubCommandMenu() { // Get All Menu
-                System.out.println("\n------ GET ALL: SELECT TABLE ------");
+                System.out.println("\n-------- GET ALL: SELECT TABLE --------");
                 System.out.println("1. Cities");
                 System.out.println("2. Passengers");
                 System.out.println("3. Airports");
@@ -281,7 +283,7 @@ public class CommandLineInterface {
                 public void execute() {
 //                    System.out.println("CITIES: Executing sub-sub-command 1 of sub-command 1 of command 2");
                     try{
-                        httpClient.runTask("http://localhost:8080", "/cities/");
+                        httpClient.runTask("http://localhost:8080/cities/");
                     }catch(Exception e){
                         System.out.println("Error: " + e + "\n");
                     }
@@ -294,7 +296,7 @@ public class CommandLineInterface {
                 public void execute() {
 //                    System.out.println("PASSENGERS: Executing sub-sub-command 2 of sub-command 1 of command 2");
                     try{
-                        httpClient.runTask("http://localhost:8080", "/passengers/");
+                        httpClient.runTask("http://localhost:8080/passengers/");
                     }catch(Exception e){
                         System.out.println("Error: " + e + "\n");
                     }
@@ -307,7 +309,7 @@ public class CommandLineInterface {
                 public void execute() {
 //                    System.out.println("AIRPORTS: Executing sub-sub-command 3 of sub-command 1 of command 2");
                     try{
-                        httpClient.runTask("http://localhost:8080", "/airports/");
+                        httpClient.runTask("http://localhost:8080/airports/");
                     }catch(Exception e){
                         System.out.println("Error: " + e + "\n");
                     }
@@ -320,7 +322,7 @@ public class CommandLineInterface {
                 public void execute() {
 //                    System.out.println("AIRCRAFT: Executing sub-sub-command 4 of sub-command 1 of command 2");
                     try{
-                        httpClient.runTask("http://localhost:8080", "/aircraft/");
+                        httpClient.runTask("http://localhost:8080/aircraft/");
                     }catch(Exception e){
                         System.out.println("Error: " + e + "\n");
                     }
@@ -364,7 +366,7 @@ public class CommandLineInterface {
                     SubSubCommandWithInt subSubCommand = subSubCommandsWithID.get(choice);
 
                     if (subSubCommand == null) {
-                        System.out.println("Invalid choice: " + choice);
+                        System.out.println("\nInvalid choice.");
                     } else {
                         String chosenEntity = null;
                         switch (choice) {
@@ -374,13 +376,13 @@ public class CommandLineInterface {
                             case 4 -> chosenEntity = "an Aircraft";
                         }
 
-                        System.out.print("\n------------- ENTER ID ------------\n");
+                        System.out.print("\n--------------- ENTER ID --------------\n\n");
                         System.out.printf("Please enter %s ID: ", chosenEntity);
 
                         while (true) {
                             int id = readIntInput();
                             if (id < 0) {
-                                System.out.print("Invalid input. Please enter a valid whole number: ");
+                                System.out.print("\nInvalid input. Please enter a valid whole number: ");
                             } else {
                                 subSubCommand.execute(id);
                                 break;
@@ -410,7 +412,7 @@ public class CommandLineInterface {
                 public void execute(int id) {
 //                    System.out.println("City: Executing sub-sub-command 1 of sub-command 2 of command 2");
                     try{
-                        httpClient.runTask("http://localhost:8080", "/city/" + id);
+                        httpClient.runTask("http://localhost:8080/city/" + id);
                     }catch(Exception e){
                         System.out.println("Error: " + e + "\n");
                     }
@@ -424,7 +426,7 @@ public class CommandLineInterface {
 //                    System.out.println("Passenger: Executing sub-sub-command 2 of sub-command 2 of command 2");
                     // TODO: Make sure passenger endpoint is added to the backend
                     try{
-                        httpClient.runTask("http://localhost:8080", "/passenger/" + id);
+                        httpClient.runTask("http://localhost:8080/passenger/" + id);
                     }catch(Exception e){
                         System.out.println("Error: " + e + "\n");
                     }
@@ -437,7 +439,7 @@ public class CommandLineInterface {
                 public void execute(int id) {
 //                    System.out.println("Airport: Executing sub-sub-command 3 of sub-command 2 of command 2");
                     try{
-                        httpClient.runTask("http://localhost:8080", "/airport/" + id);
+                        httpClient.runTask("http://localhost:8080/airport/" + id);
                     }catch(Exception e){
                         System.out.println("Error: " + e + "\n");
                     }
@@ -450,7 +452,7 @@ public class CommandLineInterface {
                 public void execute(int id) {
 //                    System.out.println("Aircraft: Executing sub-sub-command 4 of sub-command 2 of command 2");
                     try{
-                        httpClient.runTask("http://localhost:8080", "/aircraft/" + id);
+                        httpClient.runTask("http://localhost:8080/aircraft/" + id);
                     }catch(Exception e){
                         System.out.println("Error: " + e + "\n");
                     }
@@ -466,5 +468,4 @@ public class CommandLineInterface {
         cli.start();
     }
 }
-
 

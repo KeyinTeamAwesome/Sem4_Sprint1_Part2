@@ -1,21 +1,17 @@
 package com.keyin;
+
 import com.keyin.httpclient.HTTPClient;
+
+import static org.mockito.Mockito.*;
+import org.mockito.junit.jupiter.MockitoExtension;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.IOException;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.keyin.httpclient.HTTPClient.createRequest;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class HTTPClientTest {
@@ -34,3 +30,4 @@ public class HTTPClientTest {
         Assertions.assertEquals(200, response.statusCode());
     }
 }
+
