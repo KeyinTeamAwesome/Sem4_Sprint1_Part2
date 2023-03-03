@@ -7,16 +7,6 @@ import java.util.Map;
 import java.io.IOException;
 import org.json.simple.parser.ParseException;
 
-/*
-     This command line interface uses a simple implementation of the Command Pattern.
-
-     --> The Command Pattern is a behavioral design pattern in which an object is used to
-          represent and encapsulate all the information needed to call a method at a later time.
-
-     --> This pattern is used to decouple the object that invokes the operation from the one
-          that knows how to perform it.
-*/
-
 /**
  *      This command line interface uses a simple implementation of the Command Pattern.
 
@@ -143,7 +133,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/cities_airports/");
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
             }
 
@@ -156,7 +146,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/aircraft_passengers/");
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
             }
         }
@@ -168,7 +158,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/aircraft_airports/");
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
             }
         }
@@ -180,7 +170,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/airports_passengers/");
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
             }
         }
@@ -285,7 +275,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/cities/");
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
                 }
             }
@@ -298,7 +288,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/passengers/");
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
                 }
             }
@@ -311,7 +301,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/airports/");
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
                 }
             }
@@ -324,7 +314,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/aircraft/");
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
                 }
             }
@@ -414,7 +404,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/city/" + id);
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
                 }
             }
@@ -428,7 +418,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/passenger/" + id);
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
                 }
             }
@@ -441,7 +431,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/airport/" + id);
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
                 }
             }
@@ -454,7 +444,7 @@ public class CommandLineInterface {
                     try{
                         httpClient.runTask("http://localhost:8080/aircraft/" + id);
                     }catch(Exception e){
-                        System.out.println("Error: " + e + "\n");
+                        System.out.println("    ↪ Error: " + e + "\n");
                     }
                 }
             }
@@ -462,7 +452,8 @@ public class CommandLineInterface {
     }
 
 
-    // Client
+    // --------------------------------------------- Main Method --------------------------------------------
+
     public static void main(String[] args) throws URISyntaxException, IOException, InterruptedException, ParseException {
         CommandLineInterface cli = new CommandLineInterface();
         cli.start();
