@@ -4,7 +4,7 @@
 
 This is a group project for our 4nd Semester at Keyin College's Software Development Program.
 
-⠀⠀⠀⠀❗ ⠀➝⠀This repository contains **Part 2** of the assignment. *(HTTP Client/CLI/Testing)*
+⠀⠀⠀⠀ ❗ ⠀➝⠀This repository contains **Part 2** of the assignment. *(HTTP Client/CLI/Testing)*
 
 ⠀⠀⠀⠀☞ ➝⠀**Part 1** can be found [**HERE**](https://github.com/KeyinTeamAwesome/Sem4_Sprint1_Part1). *(Spring Boot Server)*
 
@@ -12,6 +12,26 @@ This is a group project for our 4nd Semester at Keyin College's Software Develop
 
 ### **Part 2: HTTP Client, Command Line Interface, Testing**
 This repository contains a **Java (Maven)** project consisting of a command line interface and HTTP client which connects via http to the server, making use of the API in [**Part 1**](https://github.com/KeyinTeamAwesome/Sem4_Sprint1_Part1).
+
+---
+
+#### **Endpoints** (🚧 In Progress)
+
+##### **Questions**
+
+| Method      | URL                                 | Question                                               |
+| :---------: | :---------------------------------- | :----------------------------------------------------- |
+|     GET     | localhost:8080/cities_airports      | What airports are in what cities?                      |
+|     GET     | localhost:8080/aircraft_passengers  | List all aircraft passengers have travelled on?        |
+|     GET     | localhost:8080/aircraft_airports    | Which airports can aircraft take off from and land at? |
+|     GET     | localhost:8080/airports_passengers  | What airports have passengers used?                    |
+
+##### **Aircraft**
+
+| Method      | URL                                 |
+| :---------: | :---------------------------------- |
+|  GET (All)  | localhost:8080/aircraft/listing     |
+| GET (By ID) | localhost:8080/aircraft/{id}        |
 
 ---
 
