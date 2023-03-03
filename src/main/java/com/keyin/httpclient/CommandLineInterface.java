@@ -271,7 +271,6 @@ public class CommandLineInterface {
             private class GetAllCitiesSubSubCommand implements QueryCommand.SubSubCommand {
                 @Override
                 public void execute() {
-//                    System.out.println("CITIES: Executing sub-sub-command 1 of sub-command 1 of command 2");
                     try{
                         httpClient.runTask("http://localhost:8080/cities/");
                     }catch(Exception e){
@@ -284,7 +283,6 @@ public class CommandLineInterface {
             private class GetAllPassengersSubSubCommand implements QueryCommand.SubSubCommand {
                 @Override
                 public void execute() {
-//                    System.out.println("PASSENGERS: Executing sub-sub-command 2 of sub-command 1 of command 2");
                     try{
                         httpClient.runTask("http://localhost:8080/passengers/");
                     }catch(Exception e){
@@ -297,7 +295,6 @@ public class CommandLineInterface {
             private class GetAllAirportsSubSubCommand implements QueryCommand.SubSubCommand {
                 @Override
                 public void execute() {
-//                    System.out.println("AIRPORTS: Executing sub-sub-command 3 of sub-command 1 of command 2");
                     try{
                         httpClient.runTask("http://localhost:8080/airports/");
                     }catch(Exception e){
@@ -310,7 +307,6 @@ public class CommandLineInterface {
             private class GetAllAircraftSubSubCommand implements QueryCommand.SubSubCommand {
                 @Override
                 public void execute() {
-//                    System.out.println("AIRCRAFT: Executing sub-sub-command 4 of sub-command 1 of command 2");
                     try{
                         httpClient.runTask("http://localhost:8080/aircraft/");
                     }catch(Exception e){
@@ -400,7 +396,6 @@ public class CommandLineInterface {
             private class GetCityByIdSubSubCommand implements QueryCommand.SubSubCommandWithInt {
                 @Override
                 public void execute(int id) {
-//                    System.out.println("City: Executing sub-sub-command 1 of sub-command 2 of command 2");
                     try{
                         httpClient.runTask("http://localhost:8080/city/" + id);
                     }catch(Exception e){
@@ -413,7 +408,6 @@ public class CommandLineInterface {
             private class GetPassengerByIdSubSubCommand implements QueryCommand.SubSubCommandWithInt {
                 @Override
                 public void execute(int id) {
-//                    System.out.println("Passenger: Executing sub-sub-command 2 of sub-command 2 of command 2");
                     // TODO: Make sure passenger endpoint is added to the backend
                     try{
                         httpClient.runTask("http://localhost:8080/passenger/" + id);
@@ -427,7 +421,6 @@ public class CommandLineInterface {
             private class GetAirportByIdSubSubCommand implements QueryCommand.SubSubCommandWithInt {
                 @Override
                 public void execute(int id) {
-//                    System.out.println("Airport: Executing sub-sub-command 3 of sub-command 2 of command 2");
                     try{
                         httpClient.runTask("http://localhost:8080/airport/" + id);
                     }catch(Exception e){
@@ -440,7 +433,6 @@ public class CommandLineInterface {
             private class GetAircraftByIdSubSubCommand implements QueryCommand.SubSubCommandWithInt {
                 @Override
                 public void execute(int id) {
-//                    System.out.println("Aircraft: Executing sub-sub-command 4 of sub-command 2 of command 2");
                     try{
                         httpClient.runTask("http://localhost:8080/aircraft/" + id);
                     }catch(Exception e){
