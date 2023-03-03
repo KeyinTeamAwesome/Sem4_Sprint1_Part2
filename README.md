@@ -15,7 +15,7 @@ This repository contains a **Java (Maven)** project consisting of a command line
 
 ---
 
-#### **Endpoints** (🚧 In Progress)
+#### ***🚧 In Progress 🚧* ➝ Endpoints**
 
 ##### **Questions**
 
