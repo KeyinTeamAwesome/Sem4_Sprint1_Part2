@@ -1,21 +1,35 @@
-# Semester 4 | Java
+<h1>Semester 4 | Java | Sprint 1
+  
 
-## **Sprint 1: Server (Spring Boot), HTTP Client, Command Line Interface, Testing**
+*Server (Spring Boot), HTTP Client, Command Line Interface*</h1>
 
 This is a group project for our 4nd Semester at Keyin College's Software Development Program.
 
 ⠀⠀⠀⠀ ❗ ⠀➝⠀This repository contains **Part 2** of the assignment. *(HTTP Client/CLI/Testing)*
 
 ⠀⠀⠀⠀☞ ➝⠀**Part 1** can be found [**HERE**](https://github.com/KeyinTeamAwesome/Sem4_Sprint1_Part1). *(Spring Boot Server)*
+  
+## Part 2: HTTP Client, Command Line Interface, Testing
 
----
-
-### **Part 2: HTTP Client, Command Line Interface, Testing**
+### **Overview**
 This repository contains a **Java (Maven)** project consisting of a command line interface and HTTP client which connects via http to the server, making use of the API in [**Part 1**](https://github.com/KeyinTeamAwesome/Sem4_Sprint1_Part1).
 
 ---
+<!-- Remove from this part and only add to part 1? -->
+### **Entities**
 
-#### ***🚧 In Progress 🚧* ➝ Endpoints**
+| Entity       | Fields                                      | 
+| :----------: | :------------------------------------------ | 
+|    Cities    | id, cityName, cityState, cityPopulation     |
+|  Passengers  | id, firstName, lastName, phoneNumber        |
+|   Airports   | id, name, code                              |
+|   Aircraft   | id, type, airlineName, numberOfPassengers   |
+
+---
+
+### **Endpoints** 
+
+*🚧 Under Construction 🚧*
 
 ##### **Questions**
 
@@ -26,11 +40,18 @@ This repository contains a **Java (Maven)** project consisting of a command line
 |     GET     | localhost:8080/aircraft_airports    | Which airports can aircraft take off from and land at? |
 |     GET     | localhost:8080/airports_passengers  | What airports have passengers used?                    |
 
+##### **City**
+
+| Method      | URL                                 |
+| :---------: | :---------------------------------- |
+|  GET (All)  | localhost:8080/cities               |
+| GET (By ID) | localhost:8080/city/{id}            |
+
 ##### **Aircraft**
 
 | Method      | URL                                 |
 | :---------: | :---------------------------------- |
-|  GET (All)  | localhost:8080/aircraft/listing     |
+|  GET (All)  | localhost:8080/aircraft             |
 | GET (By ID) | localhost:8080/aircraft/{id}        |
 
 ---
