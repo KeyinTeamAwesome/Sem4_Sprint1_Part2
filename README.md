@@ -45,31 +45,31 @@ This repository contains a **Java (Maven)** project consisting of a command line
 
 #### **Passengers**
 
-|   Method    | URI                                 |
-| :---------: | :---------------------------------- |
-|  GET (All)  | localhost:8080/passengers           |
-| GET (By ID) | localhost:8080/passenger/{id}       |
+|   Method    | URI                           |
+| :---------: | :---------------------------- |
+|  GET (All)  | localhost:8080/passengers     |
+| GET (By ID) | localhost:8080/passenger/{id} |
 
 #### **Cites**
 
-|              Method                | URI                                       | Query Parameter        |
-| :--------------------------------: | :---------------------------------------- | :--------------------- |
-|             GET (All)              | localhost:8080/cities                     |                        |
-|            GET (By ID)             | localhost:8080/city/{id}                  |                        |
+|              Method                | URI                          |
+| :--------------------------------: | :--------------------------- |
+|             GET (All)              | localhost:8080/cities        |
+|            GET (By ID)             | localhost:8080/city/{id}     |
 
 #### **Airports**
 
-|              Method                | URI                                       | Query Parameter        |
-| :--------------------------------: | :---------------------------------------- | :--------------------- |
-|             GET (All)              | localhost:8080/airports                   |                        |
-|            GET (By ID)             | localhost:8080/airport/{id}               |                        |
+|              Method                | URI                          |
+| :--------------------------------: | :--------------------------- |
+|             GET (All)              | localhost:8080/airports      |
+|            GET (By ID)             | localhost:8080/airport/{id}  |
 
 #### **Aircraft**
 
-|              Method                | URI                                       | Query Parameter        |
-| :--------------------------------: | :---------------------------------------- | :--------------------- |
-|             GET (All)              | localhost:8080/aircraft/                  |                        |
-|            GET (By ID)             | localhost:8080/aircraft/{id}              |                        |
+|              Method                | URI                          |
+| :--------------------------------: | :--------------------------- |
+|             GET (All)              | localhost:8080/aircraft      |
+|            GET (By ID)             | localhost:8080/aircraft/{id} |
 
 ---
 
@@ -109,5 +109,4 @@ This repository contains a **Java (Maven)** project consisting of a command line
       <a href="https://github.com/Tpower16"><img height="50px" src="https://avatars.githubusercontent.com/u/100700181?v=4"></a>
     </td>
   </tr>
-
 </table>
