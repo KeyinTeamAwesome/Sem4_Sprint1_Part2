@@ -1,7 +1,10 @@
-<h1>Semester 4 | Java | Sprint 1
-  
+<h1>
+  Semester 4 | Java | Sprint 1
 
-*Server (Spring Boot), HTTP Client, Command Line Interface*</h1>
+  ---
+
+  *Server (Spring Boot), HTTP Client, Command Line Interface*
+</h1>
 
 This is a group project for our 4nd Semester at Keyin College's Software Development Program.
 
@@ -27,32 +30,46 @@ This repository contains a **Java (Maven)** project consisting of a command line
 
 ---
 
-### **Endpoints** 
+### **Endpoints**
 
-*🚧 Under Construction 🚧*
+**The HTTP client has access to these endpoints via the command line interface:**
 
-##### **Questions**
+#### **Questions**
 
-| Method      | URL                                 | Question                                               |
+|   Method    | URL                                 | Question                                               |
 | :---------: | :---------------------------------- | :----------------------------------------------------- |
 |     GET     | localhost:8080/cities_airports      | What airports are in what cities?                      |
 |     GET     | localhost:8080/aircraft_passengers  | List all aircraft passengers have travelled on?        |
 |     GET     | localhost:8080/aircraft_airports    | Which airports can aircraft take off from and land at? |
 |     GET     | localhost:8080/airports_passengers  | What airports have passengers used?                    |
 
-##### **City**
+#### **Passengers**
 
-| Method      | URL                                 |
+|   Method    | URI                                 |
 | :---------: | :---------------------------------- |
-|  GET (All)  | localhost:8080/cities               |
-| GET (By ID) | localhost:8080/city/{id}            |
+|  GET (All)  | localhost:8080/passengers           |
+| GET (By ID) | localhost:8080/passenger/{id}       |
 
-##### **Aircraft**
+#### **Cites**
 
-| Method      | URL                                 |
-| :---------: | :---------------------------------- |
-|  GET (All)  | localhost:8080/aircraft             |
-| GET (By ID) | localhost:8080/aircraft/{id}        |
+|              Method                | URI                                       | Query Parameter        |
+| :--------------------------------: | :---------------------------------------- | :--------------------- |
+|             GET (All)              | localhost:8080/cities                     |                        |
+|            GET (By ID)             | localhost:8080/city/{id}                  |                        |
+
+#### **Airports**
+
+|              Method                | URI                                       | Query Parameter        |
+| :--------------------------------: | :---------------------------------------- | :--------------------- |
+|             GET (All)              | localhost:8080/airports                   |                        |
+|            GET (By ID)             | localhost:8080/airport/{id}               |                        |
+
+#### **Aircraft**
+
+|              Method                | URI                                       | Query Parameter        |
+| :--------------------------------: | :---------------------------------------- | :--------------------- |
+|             GET (All)              | localhost:8080/aircraft/                  |                        |
+|            GET (By ID)             | localhost:8080/aircraft/{id}              |                        |
 
 ---
 
