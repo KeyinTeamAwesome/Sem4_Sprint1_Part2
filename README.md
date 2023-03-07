@@ -40,7 +40,7 @@ The HTTP client has access to these endpoints via the command line interface:
 
 #### **Questions**
 
-|   Method    | URL                                 | Question                                               |
+|   Method    | URI                                 | Question                                               |
 | :---------: | :---------------------------------- | :----------------------------------------------------- |
 |     GET     | localhost:8080/cities_airports      | What airports are in what cities?                      |
 |     GET     | localhost:8080/aircraft_passengers  | List all aircraft passengers have travelled on?        |
