@@ -23,7 +23,7 @@ This repository contains a **Java (Maven)** project consisting of a command line
 
 ### **Entities**
 
-The HTTP client has access to endpoints associated with these entites:
+The HTTP client has access to these entities via their endpoints:
 
 | Entity       | Fields                                      | 
 | :----------: | :------------------------------------------ | 
