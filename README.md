@@ -1,7 +1,7 @@
 <h1>
   Semester 4 | Java | Sprint 1
 
-  *Server (Spring Boot), HTTP Client, Command Line Interface*
+  *Server (Spring Boot), HTTP Client, CLI*
 </h1>
 
 
