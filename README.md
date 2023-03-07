@@ -20,8 +20,10 @@
 This repository contains a **Java (Maven)** project consisting of a command line interface and HTTP client which connects via http to the server, making use of the API in [**Part 1**](https://github.com/KeyinTeamAwesome/Sem4_Sprint1_Part1).
 
 ---
-<!-- Remove from this part and only add to part 1? -->
+
 ### **Entities**
+
+The HTTP client has access to endpoints associated with these entites:
 
 | Entity       | Fields                                      | 
 | :----------: | :------------------------------------------ | 
@@ -34,7 +36,7 @@ This repository contains a **Java (Maven)** project consisting of a command line
 
 ### **Endpoints**
 
-**The HTTP client has access to these endpoints via the command line interface:**
+The HTTP client has access to these endpoints via the command line interface:
 
 #### **Questions**
 
