@@ -1,16 +1,18 @@
 <h1>
   Semester 4 | Java | Sprint 1
 
-  ---
-
   *Server (Spring Boot), HTTP Client, Command Line Interface*
 </h1>
 
-This is a group project for our 4nd Semester at Keyin College's Software Development Program.
 
-⠀⠀⠀⠀ ❗ ⠀➝⠀This repository contains **Part 2** of the assignment.⠀⠀⠀ *(Spring Boot Server)*
+> __Note__ 
+>
+> This is a group project for our 4nd Semester at Keyin College's Software Development Program.
+>
+>⠀⠀❗ ⠀➝⠀This repository contains **Part 2** of the assignment.⠀⠀⠀ *(Spring Boot Server)*
+>
+>⠀⠀☞ ➝⠀**Part 1** can be found [**here**](https://github.com/KeyinTeamAwesome/Sem4_Sprint1_Part1).⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ *(HTTP Client/CLI/Testing)*
 
-⠀⠀⠀⠀☞ ➝⠀**Part 1** can be found [**here**](https://github.com/KeyinTeamAwesome/Sem4_Sprint1_Part1).⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ *(HTTP Client/CLI/Testing)*
 
 ## Part 2: HTTP Client, Command Line Interface, Testing
 
